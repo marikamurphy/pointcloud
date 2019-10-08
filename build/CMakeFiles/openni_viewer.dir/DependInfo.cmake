@@ -4,17 +4,15 @@ set(CMAKE_DEPENDS_LANGUAGES
   )
 # The set of files for implicit dependencies of each language:
 set(CMAKE_DEPENDS_CHECK_CXX
-  "/home/marika/compSci/FRI/pointcloud/src/openni_viewer_simple.cpp" "/home/marika/compSci/FRI/pointcloud/build/CMakeFiles/openni_viewer.dir/src/openni_viewer_simple.cpp.o"
+  "/home/bwilab/pointcloud/pointcloud/src/openni_viewer_simple.cpp" "/home/bwilab/pointcloud/pointcloud/build/CMakeFiles/openni_viewer.dir/src/openni_viewer_simple.cpp.o"
   )
 set(CMAKE_CXX_COMPILER_ID "GNU")
 
 # Preprocessor definitions for this target.
 set(CMAKE_TARGET_DEFINITIONS_CXX
+  "DISABLE_LIBUSB_1_0"
   "DISABLE_PCAP"
   "DISABLE_PNG"
-  "EIGEN_USE_NEW_STDVECTOR"
-  "EIGEN_YES_I_KNOW_SPARSE_MODULE_IS_NOT_STABLE_YET"
-  "FLANN_STATIC"
   "QT_CORE_LIB"
   "QT_GUI_LIB"
   "QT_NO_DEBUG"
@@ -36,18 +34,18 @@ set(CMAKE_TARGET_DEFINITIONS_CXX
 set(CMAKE_CXX_TARGET_INCLUDE_PATH
   "/usr/include/vtk-6.2"
   "/usr/include/x86_64-linux-gnu"
-  "/usr/include/jsoncpp"
-  "/usr/include/tcl"
   "/usr/include/freetype2"
   "/usr/include/x86_64-linux-gnu/freetype2"
-  "/usr/include/hdf5/openmpi"
+  "/usr/include/python2.7"
+  "/usr/include/jsoncpp"
+  "/usr/include/tcl"
   "/usr/lib/openmpi/include/openmpi/opal/mca/event/libevent2021/libevent"
   "/usr/lib/openmpi/include/openmpi/opal/mca/event/libevent2021/libevent/include"
   "/usr/lib/openmpi/include"
   "/usr/lib/openmpi/include/openmpi"
+  "/usr/include/hdf5/openmpi"
   "/usr/include/libxml2"
-  "/usr/include/python2.7"
-  "/usr/include/pcl-1.7"
+  "/usr/local/include/pcl-1.9"
   "/usr/include/eigen3"
   "/usr/include/ni"
   "/usr/include/openni2"

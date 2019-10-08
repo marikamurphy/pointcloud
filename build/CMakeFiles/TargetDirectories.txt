@@ -1,3 +1,3 @@
-/home/marika/compSci/FRI/pointcloud/build/CMakeFiles/edit_cache.dir
-/home/marika/compSci/FRI/pointcloud/build/CMakeFiles/rebuild_cache.dir
-/home/marika/compSci/FRI/pointcloud/build/CMakeFiles/openni_viewer.dir
+/home/bwilab/pointcloud/pointcloud/build/CMakeFiles/edit_cache.dir
+/home/bwilab/pointcloud/pointcloud/build/CMakeFiles/rebuild_cache.dir
+/home/bwilab/pointcloud/pointcloud/build/CMakeFiles/openni_viewer.dir
