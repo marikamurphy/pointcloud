@@ -319,5 +319,5 @@ set(CMAKE_MAKEFILE_PRODUCTS
 
 # Dependency information for all targets:
 set(CMAKE_DEPEND_INFO_FILES
-  "CMakeFiles/openni_viewer.dir/DependInfo.cmake"
+  "CMakeFiles/pcd_write.dir/DependInfo.cmake"
   )

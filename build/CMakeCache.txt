@@ -180,7 +180,7 @@ CMAKE_OBJCOPY:FILEPATH=/usr/bin/objcopy
 CMAKE_OBJDUMP:FILEPATH=/usr/bin/objdump
 
 //Value Computed by CMake
-CMAKE_PROJECT_NAME:STATIC=openni_viewer
+CMAKE_PROJECT_NAME:STATIC=pcd_write
 
 //Path to a program.
 CMAKE_RANLIB:FILEPATH=/usr/bin/ranlib
@@ -466,10 +466,10 @@ USB_10_LIBRARY:FILEPATH=/usr/lib/x86_64-linux-gnu/libusb-1.0.so
 VTK_DIR:PATH=/usr/lib/cmake/vtk-6.2
 
 //Value Computed by CMake
-openni_viewer_BINARY_DIR:STATIC=/home/bwilab/pointcloud/pointcloud/build
+pcd_write_BINARY_DIR:STATIC=/home/bwilab/pointcloud/pointcloud/build
 
 //Value Computed by CMake
-openni_viewer_SOURCE_DIR:STATIC=/home/bwilab/pointcloud/pointcloud
+pcd_write_SOURCE_DIR:STATIC=/home/bwilab/pointcloud/pointcloud
 
 
 ########################

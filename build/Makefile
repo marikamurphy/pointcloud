@@ -111,44 +111,44 @@ depend:
 .PHONY : depend
 
 #=============================================================================
-# Target rules for targets named openni_viewer
+# Target rules for targets named pcd_write
 
 # Build rule for target.
-openni_viewer: cmake_check_build_system
-	$(MAKE) -f CMakeFiles/Makefile2 openni_viewer
-.PHONY : openni_viewer
+pcd_write: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 pcd_write
+.PHONY : pcd_write
 
 # fast build rule for target.
-openni_viewer/fast:
-	$(MAKE) -f CMakeFiles/openni_viewer.dir/build.make CMakeFiles/openni_viewer.dir/build
-.PHONY : openni_viewer/fast
+pcd_write/fast:
+	$(MAKE) -f CMakeFiles/pcd_write.dir/build.make CMakeFiles/pcd_write.dir/build
+.PHONY : pcd_write/fast
 
-src/openni_viewer_simple.o: src/openni_viewer_simple.cpp.o
+src/pcd_write.o: src/pcd_write.cpp.o
 
-.PHONY : src/openni_viewer_simple.o
+.PHONY : src/pcd_write.o
 
 # target to build an object file
-src/openni_viewer_simple.cpp.o:
-	$(MAKE) -f CMakeFiles/openni_viewer.dir/build.make CMakeFiles/openni_viewer.dir/src/openni_viewer_simple.cpp.o
-.PHONY : src/openni_viewer_simple.cpp.o
+src/pcd_write.cpp.o:
+	$(MAKE) -f CMakeFiles/pcd_write.dir/build.make CMakeFiles/pcd_write.dir/src/pcd_write.cpp.o
+.PHONY : src/pcd_write.cpp.o
 
-src/openni_viewer_simple.i: src/openni_viewer_simple.cpp.i
+src/pcd_write.i: src/pcd_write.cpp.i
 
-.PHONY : src/openni_viewer_simple.i
+.PHONY : src/pcd_write.i
 
 # target to preprocess a source file
-src/openni_viewer_simple.cpp.i:
-	$(MAKE) -f CMakeFiles/openni_viewer.dir/build.make CMakeFiles/openni_viewer.dir/src/openni_viewer_simple.cpp.i
-.PHONY : src/openni_viewer_simple.cpp.i
+src/pcd_write.cpp.i:
+	$(MAKE) -f CMakeFiles/pcd_write.dir/build.make CMakeFiles/pcd_write.dir/src/pcd_write.cpp.i
+.PHONY : src/pcd_write.cpp.i
 
-src/openni_viewer_simple.s: src/openni_viewer_simple.cpp.s
+src/pcd_write.s: src/pcd_write.cpp.s
 
-.PHONY : src/openni_viewer_simple.s
+.PHONY : src/pcd_write.s
 
 # target to generate assembly for a file
-src/openni_viewer_simple.cpp.s:
-	$(MAKE) -f CMakeFiles/openni_viewer.dir/build.make CMakeFiles/openni_viewer.dir/src/openni_viewer_simple.cpp.s
-.PHONY : src/openni_viewer_simple.cpp.s
+src/pcd_write.cpp.s:
+	$(MAKE) -f CMakeFiles/pcd_write.dir/build.make CMakeFiles/pcd_write.dir/src/pcd_write.cpp.s
+.PHONY : src/pcd_write.cpp.s
 
 # Help Target
 help:
@@ -158,10 +158,10 @@ help:
 	@echo "... depend"
 	@echo "... edit_cache"
 	@echo "... rebuild_cache"
-	@echo "... openni_viewer"
-	@echo "... src/openni_viewer_simple.o"
-	@echo "... src/openni_viewer_simple.i"
-	@echo "... src/openni_viewer_simple.s"
+	@echo "... pcd_write"
+	@echo "... src/pcd_write.o"
+	@echo "... src/pcd_write.i"
+	@echo "... src/pcd_write.s"
 .PHONY : help
 
 

@@ -1,22 +1,22 @@
 Determining if the pthread_create exist failed with the following output:
 Change Dir: /home/bwilab/pointcloud/pointcloud/build/CMakeFiles/CMakeTmp
 
-Run Build Command:"/usr/bin/make" "cmTC_58a80/fast"
-/usr/bin/make -f CMakeFiles/cmTC_58a80.dir/build.make CMakeFiles/cmTC_58a80.dir/build
+Run Build Command:"/usr/bin/make" "cmTC_c6839/fast"
+/usr/bin/make -f CMakeFiles/cmTC_c6839.dir/build.make CMakeFiles/cmTC_c6839.dir/build
 make[1]: Entering directory '/home/bwilab/pointcloud/pointcloud/build/CMakeFiles/CMakeTmp'
-Building C object CMakeFiles/cmTC_58a80.dir/CheckSymbolExists.c.o
-/usr/bin/cc     -o CMakeFiles/cmTC_58a80.dir/CheckSymbolExists.c.o   -c /home/bwilab/pointcloud/pointcloud/build/CMakeFiles/CMakeTmp/CheckSymbolExists.c
-Linking C executable cmTC_58a80
-/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_58a80.dir/link.txt --verbose=1
-/usr/bin/cc       CMakeFiles/cmTC_58a80.dir/CheckSymbolExists.c.o  -o cmTC_58a80 -rdynamic 
-CMakeFiles/cmTC_58a80.dir/CheckSymbolExists.c.o: In function `main':
+Building C object CMakeFiles/cmTC_c6839.dir/CheckSymbolExists.c.o
+/usr/bin/cc     -o CMakeFiles/cmTC_c6839.dir/CheckSymbolExists.c.o   -c /home/bwilab/pointcloud/pointcloud/build/CMakeFiles/CMakeTmp/CheckSymbolExists.c
+Linking C executable cmTC_c6839
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_c6839.dir/link.txt --verbose=1
+/usr/bin/cc       CMakeFiles/cmTC_c6839.dir/CheckSymbolExists.c.o  -o cmTC_c6839 -rdynamic 
+CMakeFiles/cmTC_c6839.dir/CheckSymbolExists.c.o: In function `main':
 CheckSymbolExists.c:(.text+0x16): undefined reference to `pthread_create'
 collect2: error: ld returned 1 exit status
-CMakeFiles/cmTC_58a80.dir/build.make:97: recipe for target 'cmTC_58a80' failed
-make[1]: *** [cmTC_58a80] Error 1
+CMakeFiles/cmTC_c6839.dir/build.make:97: recipe for target 'cmTC_c6839' failed
+make[1]: *** [cmTC_c6839] Error 1
 make[1]: Leaving directory '/home/bwilab/pointcloud/pointcloud/build/CMakeFiles/CMakeTmp'
-Makefile:126: recipe for target 'cmTC_58a80/fast' failed
-make: *** [cmTC_58a80/fast] Error 2
+Makefile:126: recipe for target 'cmTC_c6839/fast' failed
+make: *** [cmTC_c6839/fast] Error 2
 
 File /home/bwilab/pointcloud/pointcloud/build/CMakeFiles/CMakeTmp/CheckSymbolExists.c:
 /* */
@@ -36,20 +36,20 @@ int main(int argc, char** argv)
 Determining if the function pthread_create exists in the pthreads failed with the following output:
 Change Dir: /home/bwilab/pointcloud/pointcloud/build/CMakeFiles/CMakeTmp
 
-Run Build Command:"/usr/bin/make" "cmTC_75d76/fast"
-/usr/bin/make -f CMakeFiles/cmTC_75d76.dir/build.make CMakeFiles/cmTC_75d76.dir/build
+Run Build Command:"/usr/bin/make" "cmTC_edc8f/fast"
+/usr/bin/make -f CMakeFiles/cmTC_edc8f.dir/build.make CMakeFiles/cmTC_edc8f.dir/build
 make[1]: Entering directory '/home/bwilab/pointcloud/pointcloud/build/CMakeFiles/CMakeTmp'
-Building C object CMakeFiles/cmTC_75d76.dir/CheckFunctionExists.c.o
-/usr/bin/cc    -DCHECK_FUNCTION_EXISTS=pthread_create   -o CMakeFiles/cmTC_75d76.dir/CheckFunctionExists.c.o   -c /usr/share/cmake-3.5/Modules/CheckFunctionExists.c
-Linking C executable cmTC_75d76
-/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_75d76.dir/link.txt --verbose=1
-/usr/bin/cc   -DCHECK_FUNCTION_EXISTS=pthread_create    CMakeFiles/cmTC_75d76.dir/CheckFunctionExists.c.o  -o cmTC_75d76 -rdynamic -lpthreads 
+Building C object CMakeFiles/cmTC_edc8f.dir/CheckFunctionExists.c.o
+/usr/bin/cc    -DCHECK_FUNCTION_EXISTS=pthread_create   -o CMakeFiles/cmTC_edc8f.dir/CheckFunctionExists.c.o   -c /usr/share/cmake-3.5/Modules/CheckFunctionExists.c
+Linking C executable cmTC_edc8f
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_edc8f.dir/link.txt --verbose=1
+/usr/bin/cc   -DCHECK_FUNCTION_EXISTS=pthread_create    CMakeFiles/cmTC_edc8f.dir/CheckFunctionExists.c.o  -o cmTC_edc8f -rdynamic -lpthreads 
 /usr/bin/ld: cannot find -lpthreads
 collect2: error: ld returned 1 exit status
-CMakeFiles/cmTC_75d76.dir/build.make:97: recipe for target 'cmTC_75d76' failed
-make[1]: *** [cmTC_75d76] Error 1
+CMakeFiles/cmTC_edc8f.dir/build.make:97: recipe for target 'cmTC_edc8f' failed
+make[1]: *** [cmTC_edc8f] Error 1
 make[1]: Leaving directory '/home/bwilab/pointcloud/pointcloud/build/CMakeFiles/CMakeTmp'
-Makefile:126: recipe for target 'cmTC_75d76/fast' failed
-make: *** [cmTC_75d76/fast] Error 2
+Makefile:126: recipe for target 'cmTC_edc8f/fast' failed
+make: *** [cmTC_edc8f/fast] Error 2
 
 

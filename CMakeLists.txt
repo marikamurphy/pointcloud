@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 2.8 FATAL_ERROR)
 
-project(openni_viewer)
+project(pcd_write)
 
 ## Compile as C++11, supported in ROS Kinetic and newer
 add_compile_options(-std=c++11)
@@ -17,9 +17,9 @@ include_directories(include)
 #However, the file(GLOB...) allows for wildcard additions:
 file(GLOB SOURCES "src/*.cpp")
  
-add_executable(openni_viewer ${SOURCES})
+add_executable(pcd_write ${SOURCES})
 
 
 
-#add_executable (openni_viewer openni_viewer_simple.cpp)
-target_link_libraries (openni_viewer ${PCL_LIBRARIES})
+#add_executable (pcd_write pcd_write.cpp)
+target_link_libraries (pcd_write ${PCL_LIBRARIES})
