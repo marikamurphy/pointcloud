@@ -13,6 +13,12 @@ pcl/visualization/pcl_visualizer.h
 -
 pcl/io/pcd_io.h
 -
+string
+-
+iostream
+-
+boost/thread/thread.hpp
+-
 
 /usr/include/eigen3/Eigen/Cholesky
 Core
