@@ -15,6 +15,8 @@ pcl/io/pcd_io.h
 -
 string
 -
+stdio.h
+-
 iostream
 -
 boost/thread/thread.hpp

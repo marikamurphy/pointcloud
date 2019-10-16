@@ -22,13 +22,16 @@ This code is created purely for educational reasons
 #include <pcl/visualization/pcl_visualizer.h>
 #include <pcl/io/pcd_io.h>
 #include <string>
+#include <stdio.h>
 #include <iostream> //write to console
-#include <fstream> //send data to arduino
+//#include <fstream> //send data to arduino
+//#include "./include/serial.h"
 #include <boost/thread/thread.hpp> //sleep 
 
 #define NUM_ROTATIONS 72
 
 typedef pcl::PointXYZRGBA PointType;
+//void rotate(std::ofstream arduino);
 void rotate();
 void savePointCloudToFile(pcl::PointCloud<PointType>::ConstPtr cloud, int cloudNumber);
 
@@ -74,8 +77,7 @@ int main( int argc, char* argv[] )
                 if( lock.owns_lock() ){
                     if(cloudNumber < NUM_ROTATIONS && startedCapture == false){
                         startedCapture = true;
-                    }
-                        
+                    }      
                 }
             }
         };
@@ -85,12 +87,6 @@ int main( int argc, char* argv[] )
 
     // Start Grabber
     grabber->start();
-
-    //connect to the arduino
-    //open arduino device file (linux)
-    std::ofstream arduino;
-	arduino.open( "/dev/ttyACM0"); //TODO
-    //TODO: check that connection was established
 
     std::cout << "Press space key to begin capturing" << endl;
 
@@ -114,13 +110,15 @@ int main( int argc, char* argv[] )
                     savePointCloudToFile(cloud, cloudNumber);
                     //rotate the turntable
                     rotate();
+                    //increment number of point clouds captured
                     cloudNumber++;
                 }
+                //we've finished!
                 else if(cloudNumber >= NUM_ROTATIONS){
-                    arduino.close();
                     std::cout << "Finished capture" << endl;
                     return 0;
                 }
+                //else we haven't started capturing
                
             }
         }
@@ -128,14 +126,16 @@ int main( int argc, char* argv[] )
 }
 
 //send signal to arduino to rotate and sleep to make sure that it completes
+//void rotate(std::ofstream *arduino){
 void rotate(){
-    
-        cout << "rotating signal sent" << endl;
+        //open connection
+        FILE *arduino = fopen( "/dev/ttyACM0", "w");
         //send signal to arduino to rotate the stepper motor
-        arduino << "rotate"; //TODO: determine if appropriate to send string or say int
-        //sleep to wait for rotation to happen
-        boost::this_thread::sleep( boost::posix_time::milliseconds(500) );
-        cout << "finished rotating" << endl;
+        fprintf(arduino,"%c",'r');
+        fclose(arduino);
+        //give turntable time to actually rotate before taking picture
+        boost::this_thread::sleep( boost::posix_time::milliseconds(1000) );
+        
 }
 
 //save each captured point cloud to .pcd file in the pcd_files folder (in build folder)
