@@ -24,15 +24,61 @@ This code is created purely for educational reasons
 #include <string>
 #include <stdio.h>
 #include <iostream> //write to console
+#include <fstream>
 #include <boost/thread/thread.hpp> //sleep 
 #include <csignal>
+//delete below
+#include <unistd.h> //UNIX Standard function definitions
+#include <fcntl.h> //File control
+#include <errno.h> //Error number def
+#include <termios.h> //POSIX terminal control
+#include <termio.h>
+
+
 
 #define NUM_ROTATIONS 72
 
 typedef pcl::PointXYZRGBA PointType;
-int rotate();
+//void create_port(FILE *arduino);
+int rotate(int fd);
 void savePointCloudToFile(pcl::PointCloud<PointType>::ConstPtr cloud, int cloudNumber);
+int open_port(){ //-1 is a error
+  int port = open("/dev/ttyACM0", O_RDWR | O_NOCTTY | O_NDELAY);
+  /*O_RDWR POSIX read write
+  O_NOCTTY: not a "controlling terminal"
+  O_NDELAY": Ignore DCD signal state*/
 
+  if(port == -1){
+    perror("open_port: Unable to open /dev/ttyACM0 - ");
+  }else fcntl(port, F_SETFL, 0);
+  return (port);
+}
+
+int set_port(int port){
+  struct termios options;
+  tcgetattr(port, &options);
+
+  cfsetispeed(&options, B9600); //Typical way of setting baud rate. Actual baud rate are contained in the c_ispeed and c_ospeed members
+  cfsetospeed(&options, B9600);
+  options.c_cflag |= (CLOCAL|CREAD);
+
+  options.c_cflag &= ~CSIZE;
+  options.c_cflag &= ~CSTOPB;
+  options.c_cflag &= ~PARENB;
+  options.c_cflag |= CS8;     //No parity, 8bits, 1 stop bit (8N1)
+  options.c_cflag &= ~CRTSCTS;//CNEW_RTSCTS; //Turn off flow control
+
+  options.c_lflag &= ~(ICANON | ECHO | ECHOE | ISIG); //Make sure that Canonical input is off (raw input data)
+
+  options.c_iflag &= ~(IXON | IXOFF | IXANY); //Turn off software control flow
+
+  options.c_oflag &= ~OPOST; //Raw output data
+
+  options.c_cc[VMIN] = 0;
+  options.c_cc[VTIME] = 10;
+
+  return tcsetattr (port, TCSANOW, &options); //Make changes now without waiting for data to complete.
+}
 
 int main( int argc, char* argv[] )
 {
@@ -82,12 +128,20 @@ int main( int argc, char* argv[] )
 
     // Register Callback Function
     viewer->registerKeyboardCallback( keyboard_function );
-
+    std::cout << "Starting grabber" << endl;
     // Start Grabber
     grabber->start();
+    std::cout << "Setting up connection to arduino" << endl;
+    //open up connection to arduino
+    int fd = open_port();
+    set_port(fd);
+    write(fd, "b", 1);
+    usleep(1000000); //Wait for 4 sec
 
     std::cout << "Press space key to begin capturing" << endl;
 
+
+    
     while( !viewer->wasStopped() ){
         // Update Viewer
         viewer->spinOnce();
@@ -107,16 +161,14 @@ int main( int argc, char* argv[] )
                     //save point cloud
                     savePointCloudToFile(cloud, cloudNumber);
                     //rotate the turntable, check it was sucessful
-                    if(rotate() == -1){
-                        std::cout << "Stopping capture" << endl;
-                        raise(SIGINT); //exit process
-                    }
+                    rotate(fd);
                     //increment number of point clouds captured
                     cloudNumber++;
                 }
                 //we've finished!
                 else if(cloudNumber >= NUM_ROTATIONS){
                     std::cout << "Finished capture" << endl;
+                    close(fd);
                     raise(SIGINT); //exit process
                 }
                 //else we haven't started capturing
@@ -124,30 +176,44 @@ int main( int argc, char* argv[] )
             }
         }
     }
+
 }
 
+
 //send signal to arduino to rotate and sleep to make sure that it completes
-int rotate(){
-        FILE *arduino = NULL;
+int rotate(int fd){
         //open connection
-        arduino = fopen( "/dev/ttyACM0", "w");
-        //boost::this_thread::sleep( boost::posix_time::milliseconds(1000) );
+        //fd = fopen("/dev/ttyACM0", "w");
         //if we failed, print an error message so the user knows
-        if(arduino == NULL){
-            std::cout << "Connection to arduino failed" << endl;
-            return -1;
-        }
         //send signal to arduino to rotate the stepper motor
-        fprintf(arduino,"%c",'r');
-        fclose(arduino);
+        
+        int n;
+        unsigned char byte = 0x0F;
+        unsigned char buff[255];
+        int ready;
+        
+        
+        //n = write(fd, &byte, 1);
+       
+        n = write(fd, "r", 1);
+        std::cout <<"rotate" <<endl;
+        usleep(500000); //Wait for .5 sec
+        
+        if( n < 0 ){
+            close(fd);
+            std::cout << "ERROR: unable to write data to arduino" << endl;
+            raise(SIGINT);
+        }
+        //close(fd);
         //give turntable time to actually rotate before taking picture
-        boost::this_thread::sleep( boost::posix_time::milliseconds(1000) );
+        //boost::this_thread::sleep( boost::posix_time::milliseconds(1000) );
         return 0;
         
 }
 
 //save each captured point cloud to .pcd file in the pcd_files folder (in build folder)
 void savePointCloudToFile(pcl::PointCloud<PointType>::ConstPtr cloud, int cloudNumber){
+    
     std::string file_name = "cloud.pcd"; 
     std::string file_path = "pcd_files/";
     std::stringstream full_file_path;

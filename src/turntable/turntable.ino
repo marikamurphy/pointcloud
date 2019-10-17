@@ -24,6 +24,8 @@ void loop() {
       stepper.step(25);
   }
   
+  Serial.print("omg, omg, omg\n");
+  
   // stepper.setSpeed(6); // 6 rpm
   // stepper.step(-2038); // do 2038 steps in the other direction with faster speed -- corresponds to one revolution in 10 seconds
 }

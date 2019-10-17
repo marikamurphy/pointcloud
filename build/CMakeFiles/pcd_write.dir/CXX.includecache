@@ -19,9 +19,21 @@ stdio.h
 -
 iostream
 -
+fstream
+-
 boost/thread/thread.hpp
 -
 csignal
+-
+unistd.h
+-
+fcntl.h
+-
+errno.h
+-
+termios.h
+-
+termio.h
 -
 
 /usr/include/eigen3/Eigen/Cholesky

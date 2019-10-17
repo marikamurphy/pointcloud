@@ -7,8 +7,8 @@ add_compile_options(-std=c++11)
 
 find_package(PCL 1.2 REQUIRED)
 
-include_directories(${PCL_INCLUDE_DIRS})
-link_directories(${PCL_LIBRARY_DIRS})
+include_directories(${PCL_INCLUDE_DIRS} /home/bwilab/pointcloud/CSerial)
+link_directories(${PCL_LIBRARY_DIRS} /home/bwilab/pointcloud/CSerial)
 add_definitions(${PCL_DEFINITIONS})
 
 #Bring the headers, such as Student.h into the project
@@ -22,4 +22,4 @@ add_executable(pcd_write ${SOURCES})
 
 
 #add_executable (pcd_write pcd_write.cpp)
-target_link_libraries (pcd_write ${PCL_LIBRARIES})
+target_link_libraries (pcd_write ${PCL_LIBRARIES} libcserial.so)
