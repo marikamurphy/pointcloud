@@ -24,15 +24,13 @@ This code is created purely for educational reasons
 #include <string>
 #include <stdio.h>
 #include <iostream> //write to console
-//#include <fstream> //send data to arduino
-//#include "./include/serial.h"
 #include <boost/thread/thread.hpp> //sleep 
+#include <csignal>
 
 #define NUM_ROTATIONS 72
 
 typedef pcl::PointXYZRGBA PointType;
-//void rotate(std::ofstream arduino);
-void rotate();
+int rotate();
 void savePointCloudToFile(pcl::PointCloud<PointType>::ConstPtr cloud, int cloudNumber);
 
 
@@ -108,15 +106,18 @@ int main( int argc, char* argv[] )
                 if(cloudNumber < NUM_ROTATIONS && startedCapture){
                     //save point cloud
                     savePointCloudToFile(cloud, cloudNumber);
-                    //rotate the turntable
-                    rotate();
+                    //rotate the turntable, check it was sucessful
+                    if(rotate() == -1){
+                        std::cout << "Stopping capture" << endl;
+                        raise(SIGINT); //exit process
+                    }
                     //increment number of point clouds captured
                     cloudNumber++;
                 }
                 //we've finished!
                 else if(cloudNumber >= NUM_ROTATIONS){
                     std::cout << "Finished capture" << endl;
-                    return 0;
+                    raise(SIGINT); //exit process
                 }
                 //else we haven't started capturing
                
@@ -126,15 +127,22 @@ int main( int argc, char* argv[] )
 }
 
 //send signal to arduino to rotate and sleep to make sure that it completes
-//void rotate(std::ofstream *arduino){
-void rotate(){
+int rotate(){
+        FILE *arduino = NULL;
         //open connection
-        FILE *arduino = fopen( "/dev/ttyACM0", "w");
+        arduino = fopen( "/dev/ttyACM1", "w");
+        //boost::this_thread::sleep( boost::posix_time::milliseconds(1000) );
+        //if we failed, print an error message so the user knows
+        if(arduino == NULL){
+            std::cout << "Connection to arduino failed" << endl;
+            return -1;
+        }
         //send signal to arduino to rotate the stepper motor
         fprintf(arduino,"%c",'r');
         fclose(arduino);
         //give turntable time to actually rotate before taking picture
         boost::this_thread::sleep( boost::posix_time::milliseconds(1000) );
+        return 0;
         
 }
 
