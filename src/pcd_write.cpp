@@ -130,7 +130,7 @@ int main( int argc, char* argv[] )
 int rotate(){
         FILE *arduino = NULL;
         //open connection
-        arduino = fopen( "/dev/ttyACM1", "w");
+        arduino = fopen( "/dev/ttyACM0", "w");
         //boost::this_thread::sleep( boost::posix_time::milliseconds(1000) );
         //if we failed, print an error message so the user knows
         if(arduino == NULL){
