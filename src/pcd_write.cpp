@@ -23,8 +23,7 @@ This code is created purely for educational reasons
 #include <pcl/io/pcd_io.h>
 #include <string>
 #include <stdio.h>
-//#include <iostream> //write to console
-//#include <fstream>
+
 #include <boost/thread/thread.hpp> //sleep 
 #include <csignal>
 #include <unistd.h> //UNIX Standard function definitions
@@ -38,7 +37,6 @@ This code is created purely for educational reasons
 
 typedef pcl::PointXYZRGBA PointType;
 
-//void create_port(FILE *arduino);
 int rotate(int fd);
 void savePointCloudToFile(pcl::PointCloud<PointType>::ConstPtr cloud, int cloudNumber );
 int open_port(){ //-1 is a error
@@ -200,7 +198,7 @@ int rotate(int fd){
             raise(SIGINT);
         }
         //give turntable time to actually rotate before taking picture
-        boost::this_thread::sleep( boost::posix_time::milliseconds(1500) );
+        boost::this_thread::sleep( boost::posix_time::milliseconds(10000) );
         return 0;
         
 }
