@@ -20,11 +20,16 @@ void loop() {
   if(Serial.available() > 0){
     // read the data
     received = Serial.read();
-    if(received == 'r')
-      stepper.step(25);
+    if(received == 'r'){
+      stepper.step(450);
+      //delay(1000);
+      //Serial.println("rotating");
+      received = 's';
+    }
+      
   }
   
-  Serial.print("omg, omg, omg\n");
+  
   
   // stepper.setSpeed(6); // 6 rpm
   // stepper.step(-2038); // do 2038 steps in the other direction with faster speed -- corresponds to one revolution in 10 seconds
