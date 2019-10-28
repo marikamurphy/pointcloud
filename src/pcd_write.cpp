@@ -39,6 +39,7 @@ typedef pcl::PointXYZRGBA PointType;
 
 int rotate(int fd);
 void savePointCloudToFile(pcl::PointCloud<PointType>::ConstPtr cloud, int cloudNumber );
+
 int open_port(){ //-1 is a error
   int port = open("/dev/ttyACM0", O_RDWR | O_NOCTTY | O_NDELAY);
   /*O_RDWR POSIX read write
@@ -198,7 +199,7 @@ int rotate(int fd){
             raise(SIGINT);
         }
         //give turntable time to actually rotate before taking picture
-        boost::this_thread::sleep( boost::posix_time::milliseconds(10000) );
+        boost::this_thread::sleep( boost::posix_time::milliseconds(5000) );
         return 0;
         
 }
