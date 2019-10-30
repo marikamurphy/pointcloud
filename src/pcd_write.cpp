@@ -23,6 +23,7 @@ This code is created purely for educational reasons
 #include <pcl/io/pcd_io.h>
 #include <string>
 #include <stdio.h>
+#include <pcl/filters/passthrough.h>
 
 #include <boost/thread/thread.hpp> //sleep 
 #include <csignal>
@@ -33,12 +34,13 @@ This code is created purely for educational reasons
 #include <termio.h>
 
 
-#define NUM_ROTATIONS 72
+#define NUM_ROTATIONS 10
 
 typedef pcl::PointXYZRGBA PointType;
 
 int rotate(int fd);
 void savePointCloudToFile(pcl::PointCloud<PointType>::ConstPtr cloud, int cloudNumber );
+pcl::PointCloud<PointType>::Ptr filterCloud(pcl::PointCloud<PointType>::ConstPtr cloud, std::string axis, double minLimit, double maxLimit );
 
 int open_port(){ //-1 is a error
   int port = open("/dev/ttyACM0", O_RDWR | O_NOCTTY | O_NDELAY);
@@ -99,6 +101,10 @@ int main( int argc, char* argv[] )
         [&cloud, &mutex]( const pcl::PointCloud<PointType>::ConstPtr& ptr ){
             boost::mutex::scoped_lock lock( mutex );
             cloud = ptr;
+            cloud = filterCloud(cloud, "x", -0.5, 0.5);
+            cloud = filterCloud(cloud, "y", -0.5, 0.5);
+            cloud = filterCloud(cloud, "z", 0.0, 1.0);
+           
         };
 
     
@@ -122,6 +128,7 @@ int main( int argc, char* argv[] )
                     }      
                 }
             }
+            
         };
 
     // Register Callback Function
@@ -148,12 +155,11 @@ int main( int argc, char* argv[] )
     while( !viewer->wasStopped() ){
         // Update Viewer
         viewer->spinOnce();
-
+       
         boost::mutex::scoped_try_lock lock( mutex );
         if( cloud && lock.owns_lock() ){
             if( cloud->size() != 0 ){
                 /* Processing Point Cloud */
-
                 // Update Point Cloud
                 if( !viewer->updatePointCloud( cloud, "cloud" ) ){
                     viewer->addPointCloud( cloud, "cloud" );
@@ -199,7 +205,7 @@ int rotate(int fd){
             raise(SIGINT);
         }
         //give turntable time to actually rotate before taking picture
-        boost::this_thread::sleep( boost::posix_time::milliseconds(5000) );
+        boost::this_thread::sleep( boost::posix_time::milliseconds(3000) );
         return 0;
         
 }
@@ -216,4 +222,17 @@ void savePointCloudToFile(pcl::PointCloud<PointType>::ConstPtr cloud, int cloudN
     std::cout << "Saving cloud #" << cloudNumber << endl;
     
     
+}
+
+//filter the cloud to fit within minLimit and maxLimit along axis
+pcl::PointCloud<PointType>::Ptr filterCloud(pcl::PointCloud<PointType>::ConstPtr cloud, std::string axis, double minLimit, double maxLimit ){
+    pcl::PointCloud<PointType>::Ptr cloud_filtered (new pcl::PointCloud<PointType>);
+    pcl::PassThrough<PointType> pass;
+    pass.setInputCloud (cloud);
+    pass.setFilterFieldName (axis);
+    pass.setFilterLimits (minLimit, maxLimit);
+    //pass.setFilterLimitsNegative (true);
+    pass.filter (*cloud_filtered);
+    return cloud_filtered;
+
 }
