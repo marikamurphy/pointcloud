@@ -111,6 +111,19 @@ depend:
 .PHONY : depend
 
 #=============================================================================
+# Target rules for targets named pcd_merge
+
+# Build rule for target.
+pcd_merge: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 pcd_merge
+.PHONY : pcd_merge
+
+# fast build rule for target.
+pcd_merge/fast:
+	$(MAKE) -f CMakeFiles/pcd_merge.dir/build.make CMakeFiles/pcd_merge.dir/build
+.PHONY : pcd_merge/fast
+
+#=============================================================================
 # Target rules for targets named pcd_write
 
 # Build rule for target.
@@ -123,32 +136,59 @@ pcd_write/fast:
 	$(MAKE) -f CMakeFiles/pcd_write.dir/build.make CMakeFiles/pcd_write.dir/build
 .PHONY : pcd_write/fast
 
-src/pcd_write.o: src/pcd_write.cpp.o
+src/merge/pcd_merge.o: src/merge/pcd_merge.cpp.o
 
-.PHONY : src/pcd_write.o
+.PHONY : src/merge/pcd_merge.o
 
 # target to build an object file
-src/pcd_write.cpp.o:
-	$(MAKE) -f CMakeFiles/pcd_write.dir/build.make CMakeFiles/pcd_write.dir/src/pcd_write.cpp.o
-.PHONY : src/pcd_write.cpp.o
+src/merge/pcd_merge.cpp.o:
+	$(MAKE) -f CMakeFiles/pcd_merge.dir/build.make CMakeFiles/pcd_merge.dir/src/merge/pcd_merge.cpp.o
+.PHONY : src/merge/pcd_merge.cpp.o
 
-src/pcd_write.i: src/pcd_write.cpp.i
+src/merge/pcd_merge.i: src/merge/pcd_merge.cpp.i
 
-.PHONY : src/pcd_write.i
+.PHONY : src/merge/pcd_merge.i
 
 # target to preprocess a source file
-src/pcd_write.cpp.i:
-	$(MAKE) -f CMakeFiles/pcd_write.dir/build.make CMakeFiles/pcd_write.dir/src/pcd_write.cpp.i
-.PHONY : src/pcd_write.cpp.i
+src/merge/pcd_merge.cpp.i:
+	$(MAKE) -f CMakeFiles/pcd_merge.dir/build.make CMakeFiles/pcd_merge.dir/src/merge/pcd_merge.cpp.i
+.PHONY : src/merge/pcd_merge.cpp.i
 
-src/pcd_write.s: src/pcd_write.cpp.s
+src/merge/pcd_merge.s: src/merge/pcd_merge.cpp.s
 
-.PHONY : src/pcd_write.s
+.PHONY : src/merge/pcd_merge.s
 
 # target to generate assembly for a file
-src/pcd_write.cpp.s:
-	$(MAKE) -f CMakeFiles/pcd_write.dir/build.make CMakeFiles/pcd_write.dir/src/pcd_write.cpp.s
-.PHONY : src/pcd_write.cpp.s
+src/merge/pcd_merge.cpp.s:
+	$(MAKE) -f CMakeFiles/pcd_merge.dir/build.make CMakeFiles/pcd_merge.dir/src/merge/pcd_merge.cpp.s
+.PHONY : src/merge/pcd_merge.cpp.s
+
+src/write/pcd_write.o: src/write/pcd_write.cpp.o
+
+.PHONY : src/write/pcd_write.o
+
+# target to build an object file
+src/write/pcd_write.cpp.o:
+	$(MAKE) -f CMakeFiles/pcd_write.dir/build.make CMakeFiles/pcd_write.dir/src/write/pcd_write.cpp.o
+.PHONY : src/write/pcd_write.cpp.o
+
+src/write/pcd_write.i: src/write/pcd_write.cpp.i
+
+.PHONY : src/write/pcd_write.i
+
+# target to preprocess a source file
+src/write/pcd_write.cpp.i:
+	$(MAKE) -f CMakeFiles/pcd_write.dir/build.make CMakeFiles/pcd_write.dir/src/write/pcd_write.cpp.i
+.PHONY : src/write/pcd_write.cpp.i
+
+src/write/pcd_write.s: src/write/pcd_write.cpp.s
+
+.PHONY : src/write/pcd_write.s
+
+# target to generate assembly for a file
+src/write/pcd_write.cpp.s:
+	$(MAKE) -f CMakeFiles/pcd_write.dir/build.make CMakeFiles/pcd_write.dir/src/write/pcd_write.cpp.s
+.PHONY : src/write/pcd_write.cpp.s
 
 # Help Target
 help:
@@ -157,11 +197,15 @@ help:
 	@echo "... clean"
 	@echo "... depend"
 	@echo "... edit_cache"
+	@echo "... pcd_merge"
 	@echo "... rebuild_cache"
 	@echo "... pcd_write"
-	@echo "... src/pcd_write.o"
-	@echo "... src/pcd_write.i"
-	@echo "... src/pcd_write.s"
+	@echo "... src/merge/pcd_merge.o"
+	@echo "... src/merge/pcd_merge.i"
+	@echo "... src/merge/pcd_merge.s"
+	@echo "... src/write/pcd_write.o"
+	@echo "... src/write/pcd_write.i"
+	@echo "... src/write/pcd_write.s"
 .PHONY : help
 
 

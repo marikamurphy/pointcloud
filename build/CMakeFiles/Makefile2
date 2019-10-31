@@ -60,13 +60,50 @@ CMAKE_SOURCE_DIR = /home/bwilab/pointcloud/pointcloud
 CMAKE_BINARY_DIR = /home/bwilab/pointcloud/pointcloud/build
 
 #=============================================================================
+# Target rules for target CMakeFiles/pcd_merge.dir
+
+# All Build rule for target.
+CMakeFiles/pcd_merge.dir/all:
+	$(MAKE) -f CMakeFiles/pcd_merge.dir/build.make CMakeFiles/pcd_merge.dir/depend
+	$(MAKE) -f CMakeFiles/pcd_merge.dir/build.make CMakeFiles/pcd_merge.dir/build
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/bwilab/pointcloud/pointcloud/build/CMakeFiles --progress-num=1,2 "Built target pcd_merge"
+.PHONY : CMakeFiles/pcd_merge.dir/all
+
+# Include target in all.
+all: CMakeFiles/pcd_merge.dir/all
+
+.PHONY : all
+
+# Build rule for subdir invocation for target.
+CMakeFiles/pcd_merge.dir/rule: cmake_check_build_system
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/bwilab/pointcloud/pointcloud/build/CMakeFiles 2
+	$(MAKE) -f CMakeFiles/Makefile2 CMakeFiles/pcd_merge.dir/all
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/bwilab/pointcloud/pointcloud/build/CMakeFiles 0
+.PHONY : CMakeFiles/pcd_merge.dir/rule
+
+# Convenience name for target.
+pcd_merge: CMakeFiles/pcd_merge.dir/rule
+
+.PHONY : pcd_merge
+
+# clean rule for target.
+CMakeFiles/pcd_merge.dir/clean:
+	$(MAKE) -f CMakeFiles/pcd_merge.dir/build.make CMakeFiles/pcd_merge.dir/clean
+.PHONY : CMakeFiles/pcd_merge.dir/clean
+
+# clean rule for target.
+clean: CMakeFiles/pcd_merge.dir/clean
+
+.PHONY : clean
+
+#=============================================================================
 # Target rules for target CMakeFiles/pcd_write.dir
 
 # All Build rule for target.
 CMakeFiles/pcd_write.dir/all:
 	$(MAKE) -f CMakeFiles/pcd_write.dir/build.make CMakeFiles/pcd_write.dir/depend
 	$(MAKE) -f CMakeFiles/pcd_write.dir/build.make CMakeFiles/pcd_write.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/bwilab/pointcloud/pointcloud/build/CMakeFiles --progress-num=1,2 "Built target pcd_write"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/bwilab/pointcloud/pointcloud/build/CMakeFiles --progress-num=3,4 "Built target pcd_write"
 .PHONY : CMakeFiles/pcd_write.dir/all
 
 # Include target in all.

@@ -6,7 +6,7 @@
 
 #IncludeRegexTransform: 
 
-/home/bwilab/pointcloud/pointcloud/src/pcd_write.cpp
+/home/bwilab/pointcloud/pointcloud/src/write/pcd_write.cpp
 pcl/io/openni_grabber.h
 -
 pcl/visualization/pcl_visualizer.h

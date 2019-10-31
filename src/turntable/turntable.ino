@@ -15,7 +15,7 @@ void setup() {
 }
 
 void loop() {
-  stepper.setSpeed(5); // 1 rpm
+  stepper.setSpeed(10); // 1 rpm
   //rotate five degre
   if(Serial.available() > 0){
     // read the data

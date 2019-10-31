@@ -4,7 +4,7 @@ set(CMAKE_DEPENDS_LANGUAGES
   )
 # The set of files for implicit dependencies of each language:
 set(CMAKE_DEPENDS_CHECK_CXX
-  "/home/bwilab/pointcloud/pointcloud/src/pcd_write.cpp" "/home/bwilab/pointcloud/pointcloud/build/CMakeFiles/pcd_write.dir/src/pcd_write.cpp.o"
+  "/home/bwilab/pointcloud/pointcloud/src/write/pcd_write.cpp" "/home/bwilab/pointcloud/pointcloud/build/CMakeFiles/pcd_write.dir/src/write/pcd_write.cpp.o"
   )
 set(CMAKE_CXX_COMPILER_ID "GNU")
 
@@ -49,7 +49,6 @@ set(CMAKE_CXX_TARGET_INCLUDE_PATH
   "/usr/include/eigen3"
   "/usr/include/ni"
   "/usr/include/openni2"
-  "/home/bwilab/pointcloud/CSerial"
   "../include"
   "/usr/include/x86_64-linux-gnu/qt5"
   "/usr/include/x86_64-linux-gnu/qt5/QtWidgets"

@@ -57,38 +57,38 @@ include CMakeFiles/pcd_write.dir/progress.make
 # Include the compile flags for this target's objects.
 include CMakeFiles/pcd_write.dir/flags.make
 
-CMakeFiles/pcd_write.dir/src/pcd_write.cpp.o: CMakeFiles/pcd_write.dir/flags.make
-CMakeFiles/pcd_write.dir/src/pcd_write.cpp.o: ../src/pcd_write.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/bwilab/pointcloud/pointcloud/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object CMakeFiles/pcd_write.dir/src/pcd_write.cpp.o"
-	/usr/bin/c++   $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/pcd_write.dir/src/pcd_write.cpp.o -c /home/bwilab/pointcloud/pointcloud/src/pcd_write.cpp
+CMakeFiles/pcd_write.dir/src/write/pcd_write.cpp.o: CMakeFiles/pcd_write.dir/flags.make
+CMakeFiles/pcd_write.dir/src/write/pcd_write.cpp.o: ../src/write/pcd_write.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/bwilab/pointcloud/pointcloud/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object CMakeFiles/pcd_write.dir/src/write/pcd_write.cpp.o"
+	/usr/bin/c++   $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/pcd_write.dir/src/write/pcd_write.cpp.o -c /home/bwilab/pointcloud/pointcloud/src/write/pcd_write.cpp
 
-CMakeFiles/pcd_write.dir/src/pcd_write.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/pcd_write.dir/src/pcd_write.cpp.i"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/bwilab/pointcloud/pointcloud/src/pcd_write.cpp > CMakeFiles/pcd_write.dir/src/pcd_write.cpp.i
+CMakeFiles/pcd_write.dir/src/write/pcd_write.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/pcd_write.dir/src/write/pcd_write.cpp.i"
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/bwilab/pointcloud/pointcloud/src/write/pcd_write.cpp > CMakeFiles/pcd_write.dir/src/write/pcd_write.cpp.i
 
-CMakeFiles/pcd_write.dir/src/pcd_write.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/pcd_write.dir/src/pcd_write.cpp.s"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/bwilab/pointcloud/pointcloud/src/pcd_write.cpp -o CMakeFiles/pcd_write.dir/src/pcd_write.cpp.s
+CMakeFiles/pcd_write.dir/src/write/pcd_write.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/pcd_write.dir/src/write/pcd_write.cpp.s"
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/bwilab/pointcloud/pointcloud/src/write/pcd_write.cpp -o CMakeFiles/pcd_write.dir/src/write/pcd_write.cpp.s
 
-CMakeFiles/pcd_write.dir/src/pcd_write.cpp.o.requires:
+CMakeFiles/pcd_write.dir/src/write/pcd_write.cpp.o.requires:
 
-.PHONY : CMakeFiles/pcd_write.dir/src/pcd_write.cpp.o.requires
+.PHONY : CMakeFiles/pcd_write.dir/src/write/pcd_write.cpp.o.requires
 
-CMakeFiles/pcd_write.dir/src/pcd_write.cpp.o.provides: CMakeFiles/pcd_write.dir/src/pcd_write.cpp.o.requires
-	$(MAKE) -f CMakeFiles/pcd_write.dir/build.make CMakeFiles/pcd_write.dir/src/pcd_write.cpp.o.provides.build
-.PHONY : CMakeFiles/pcd_write.dir/src/pcd_write.cpp.o.provides
+CMakeFiles/pcd_write.dir/src/write/pcd_write.cpp.o.provides: CMakeFiles/pcd_write.dir/src/write/pcd_write.cpp.o.requires
+	$(MAKE) -f CMakeFiles/pcd_write.dir/build.make CMakeFiles/pcd_write.dir/src/write/pcd_write.cpp.o.provides.build
+.PHONY : CMakeFiles/pcd_write.dir/src/write/pcd_write.cpp.o.provides
 
-CMakeFiles/pcd_write.dir/src/pcd_write.cpp.o.provides.build: CMakeFiles/pcd_write.dir/src/pcd_write.cpp.o
+CMakeFiles/pcd_write.dir/src/write/pcd_write.cpp.o.provides.build: CMakeFiles/pcd_write.dir/src/write/pcd_write.cpp.o
 
 
 # Object files for target pcd_write
 pcd_write_OBJECTS = \
-"CMakeFiles/pcd_write.dir/src/pcd_write.cpp.o"
+"CMakeFiles/pcd_write.dir/src/write/pcd_write.cpp.o"
 
 # External object files for target pcd_write
 pcd_write_EXTERNAL_OBJECTS =
 
-pcd_write: CMakeFiles/pcd_write.dir/src/pcd_write.cpp.o
+pcd_write: CMakeFiles/pcd_write.dir/src/write/pcd_write.cpp.o
 pcd_write: CMakeFiles/pcd_write.dir/build.make
 pcd_write: /usr/local/lib/libpcl_people.so
 pcd_write: /usr/local/lib/libpcl_stereo.so
@@ -322,7 +322,7 @@ CMakeFiles/pcd_write.dir/build: pcd_write
 
 .PHONY : CMakeFiles/pcd_write.dir/build
 
-CMakeFiles/pcd_write.dir/requires: CMakeFiles/pcd_write.dir/src/pcd_write.cpp.o.requires
+CMakeFiles/pcd_write.dir/requires: CMakeFiles/pcd_write.dir/src/write/pcd_write.cpp.o.requires
 
 .PHONY : CMakeFiles/pcd_write.dir/requires
 
