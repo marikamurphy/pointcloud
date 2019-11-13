@@ -21,7 +21,8 @@ void loop() {
     // read the data
     received = Serial.read();
     if(received == 'r'){
-      stepper.step(450);
+      //stepper.step(2038);
+      stepper.step(1019);
       //delay(1000);
       //Serial.println("rotating");
       received = 's';

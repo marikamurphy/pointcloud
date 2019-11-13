@@ -34,7 +34,7 @@ This code is created purely for educational reasons
 #include <termio.h>
 
 
-#define NUM_ROTATIONS 10
+#define NUM_ROTATIONS 12
 
 typedef pcl::PointXYZRGBA PointType;
 
@@ -57,23 +57,18 @@ int open_port(){ //-1 is a error
 int set_port(int port){
   struct termios options;
   tcgetattr(port, &options);
-
   cfsetispeed(&options, B9600); //Typical way of setting baud rate. Actual baud rate are contained in the c_ispeed and c_ospeed members
   cfsetospeed(&options, B9600);
+  
   options.c_cflag |= (CLOCAL|CREAD);
-
   options.c_cflag &= ~CSIZE;
   options.c_cflag &= ~CSTOPB;
   options.c_cflag &= ~PARENB;
   options.c_cflag |= CS8;     //No parity, 8bits, 1 stop bit (8N1)
   options.c_cflag &= ~CRTSCTS;//CNEW_RTSCTS; //Turn off flow control
-
   options.c_lflag &= ~(ICANON | ECHO | ECHOE | ISIG); //Make sure that Canonical input is off (raw input data)
-
   options.c_iflag &= ~(IXON | IXOFF | IXANY); //Turn off software control flow
-
   options.c_oflag &= ~OPOST; //Raw output data
-
   options.c_cc[VMIN] = 0;
   options.c_cc[VTIME] = 10;
 
@@ -102,12 +97,11 @@ int main( int argc, char* argv[] )
             boost::mutex::scoped_lock lock( mutex );
             cloud = ptr;
             cloud = filterCloud(cloud, "x", -0.5, 0.5);
-            cloud = filterCloud(cloud, "y", -0.5, 0.5);
-            cloud = filterCloud(cloud, "z", 0.0, 1.0);
+            cloud = filterCloud(cloud, "y", -0.75, 0.75);
+            cloud = filterCloud(cloud, "z", -0.5, 1.5);
            
         };
 
-    
     // Kinect2Grabber (may use later?)
     //boost::shared_ptr<pcl::Grabber> grabber = boost::make_shared<pcl::Kinect2Grabber>();
     // create a new grabber for OpenNI devices
@@ -133,6 +127,7 @@ int main( int argc, char* argv[] )
 
     // Register Callback Function
     viewer->registerKeyboardCallback( keyboard_function );
+    viewer->addCoordinateSystem (1.0, 0.0,0.0, 1.0, "Point Cloud Viewer", 0);
     std::cout << "Setting up connection to arduino" << endl;
     //open up connection to arduino
     int fd = open_port();
@@ -149,13 +144,11 @@ int main( int argc, char* argv[] )
     std::cout << "Starting grabber" << endl;
     // Start Grabber
     grabber->start();
-
     std::cout << "Press space key to begin capturing" << endl;
     
     while( !viewer->wasStopped() ){
         // Update Viewer
         viewer->spinOnce();
-       
         boost::mutex::scoped_try_lock lock( mutex );
         if( cloud && lock.owns_lock() ){
             if( cloud->size() != 0 ){
@@ -168,15 +161,11 @@ int main( int argc, char* argv[] )
                 //need to rotate NUM_ROTATIONS and save each
                 if(cloudNumber < NUM_ROTATIONS && startedCapture){
                     //save point cloud
-                     
-                
                     savePointCloudToFile(cloud, cloudNumber);
                     //rotate the turntable, check it was sucessful
                     rotate(fd);
                     //increment number of point clouds captured
-                    cloudNumber++;
-                
-                    
+                    cloudNumber++; 
                 }
                 //we've finished!
                 else if(cloudNumber >= NUM_ROTATIONS){
@@ -185,11 +174,9 @@ int main( int argc, char* argv[] )
                     raise(SIGINT); //exit process
                 }
                 //else we haven't started capturing
-               
             }
         }
     }
-
 }
 
 
