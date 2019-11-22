@@ -11,11 +11,31 @@
 
 typedef pcl::PointXYZRGBA PointType;
 void savePointCloudToFile(pcl::PointCloud<PointType>::Ptr cloud, int cloudNumber );
-void transform_pointCloud(pcl::PointCloud<PointType>::Ptr source_cloud, int cloudNumber);
+void transform_pointCloud(pcl::PointCloud<PointType>::Ptr source_cloud, int cloudNumber, double x, double y, double z);
 
 int
 main (int argc, char** argv)
 {
+  //get the axis of rotation from axis_coordinates.txt
+  
+  double x = 0.0;
+  double y = 0.0;
+  double z = 0.0;
+  std::ifstream axis ("axis_coordinates.txt");
+  if (axis.is_open())
+  {
+    axis >> x;
+    std::cout << "reading x: " << x << '\n';
+    axis >> y;
+    std::cout << "reading y: " << y << '\n';
+    axis >> z;
+    std::cout << "reading z: " << z << '\n';
+    
+    axis.close();
+  }
+  else{
+    std::cout <<"Unable to open file axis_coordinates.txt \n";
+  }
 
   pcl::visualization::PCLVisualizer viewer ("Matrix transformation");
   //viewer.addCoordinateSystem (1.0, "cloud", 0);
@@ -25,7 +45,7 @@ main (int argc, char** argv)
   for(int i = 0; i < NUM_ROTATIONS; i++){
     // Load pcd file
     pcl::PointCloud<PointType>::Ptr source_cloud (new pcl::PointCloud<PointType> ());
-    transform_pointCloud(source_cloud, i);
+    transform_pointCloud(source_cloud, i, x, y, z);
     // We add the point cloud to the viewer and pass the color handler
     viewer.addPointCloud (source_cloud,  "transformed_cloud" +i);
     viewer.setPointCloudRenderingProperties (pcl::visualization::PCL_VISUALIZER_POINT_SIZE, 2, "transformed_cloud"+i);
@@ -62,7 +82,7 @@ void savePointCloudToFile(pcl::PointCloud<PointType>::ConstPtr cloud, int cloudN
     
 }
 
-void transform_pointCloud(pcl::PointCloud<PointType>::Ptr source_cloud, int cloudNumber){
+void transform_pointCloud(pcl::PointCloud<PointType>::Ptr source_cloud, int cloudNumber, double x, double y, double z){
 
     std::string file_name = "cloud.pcd"; 
     std::string file_path = "pcd_files/";
@@ -76,12 +96,12 @@ void transform_pointCloud(pcl::PointCloud<PointType>::Ptr source_cloud, int clou
 
   /*  Using a Affine3f
   */
-  float theta = cloudNumber * M_PI * 12.5 / 180.0; // The angle of rotation in radians, M_PI
+  float theta = -cloudNumber * M_PI * 12.5 / 180.0; // The angle of rotation in radians, M_PI
   Eigen::Affine3f transform = Eigen::Affine3f::Identity();
 
   // Define a translation of .9 meters on the z axis.
   //TODO... figure out how to set this
-  transform.translation() << 0.0 , 0.0, -1.0;
+  transform.translation() << y , z, -x;
 
    // Executing the transformation
   pcl::transformPointCloud (*source_cloud, *source_cloud, transform);

@@ -906,33 +906,6 @@ gtest_main/fast:
 	$(MAKE) -f gtest/gtest/CMakeFiles/gtest_main.dir/build.make gtest/gtest/CMakeFiles/gtest_main.dir/build
 .PHONY : gtest_main/fast
 
-src/alvar/AlvarMarker.o: src/alvar/AlvarMarker.cpp.o
-
-.PHONY : src/alvar/AlvarMarker.o
-
-# target to build an object file
-src/alvar/AlvarMarker.cpp.o:
-	$(MAKE) -f CMakeFiles/find_alvar.dir/build.make CMakeFiles/find_alvar.dir/src/alvar/AlvarMarker.cpp.o
-.PHONY : src/alvar/AlvarMarker.cpp.o
-
-src/alvar/AlvarMarker.i: src/alvar/AlvarMarker.cpp.i
-
-.PHONY : src/alvar/AlvarMarker.i
-
-# target to preprocess a source file
-src/alvar/AlvarMarker.cpp.i:
-	$(MAKE) -f CMakeFiles/find_alvar.dir/build.make CMakeFiles/find_alvar.dir/src/alvar/AlvarMarker.cpp.i
-.PHONY : src/alvar/AlvarMarker.cpp.i
-
-src/alvar/AlvarMarker.s: src/alvar/AlvarMarker.cpp.s
-
-.PHONY : src/alvar/AlvarMarker.s
-
-# target to generate assembly for a file
-src/alvar/AlvarMarker.cpp.s:
-	$(MAKE) -f CMakeFiles/find_alvar.dir/build.make CMakeFiles/find_alvar.dir/src/alvar/AlvarMarker.cpp.s
-.PHONY : src/alvar/AlvarMarker.cpp.s
-
 src/alvar/alvar.o: src/alvar/alvar.cpp.o
 
 .PHONY : src/alvar/alvar.o
@@ -1084,9 +1057,6 @@ help:
 	@echo "... gmock_main"
 	@echo "... gtest"
 	@echo "... gtest_main"
-	@echo "... src/alvar/AlvarMarker.o"
-	@echo "... src/alvar/AlvarMarker.i"
-	@echo "... src/alvar/AlvarMarker.s"
 	@echo "... src/alvar/alvar.o"
 	@echo "... src/alvar/alvar.i"
 	@echo "... src/alvar/alvar.s"

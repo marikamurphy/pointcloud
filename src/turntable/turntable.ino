@@ -1,39 +1,37 @@
-#include <Stepper.h>
 
-#define STEPS 2038 // the number of steps in one revolution of your motor (28BYJ-48)
-	
-Stepper stepper(STEPS, 8, 10, 9, 11);
-char received;
-void setup() {
-  // set up Serial library at 9600 bps
+int smDirectionPin = 8; //Direction pin
+int smStepPin = 9; //Stepper pin
+char received; 
+void setup(){
+  /*Sets all pin to output; the microcontroller will send them(the pins) bits, it will not expect to receive any bits from thiese pins.*/
+  pinMode(smDirectionPin, OUTPUT);
+  pinMode(smStepPin, OUTPUT);
+   
   Serial.begin(9600);
   while (!Serial) {
     ; // wait for serial port to connect. Needed for Native USB only
   }  
-  // prints to console that turntable connection established
-  Serial.println("Connection to turntable established");  
+  Serial.println("Connection established");
 }
+ 
+void loop(){
 
-void loop() {
-  stepper.setSpeed(10); // 1 rpm
-  //rotate five degre
+  digitalWrite(smDirectionPin, LOW); //Writes the direction to the EasyDriver DIR pin. (LOW is counter clockwise).
+  /*Turns the motor fast 1600 steps*/
   if(Serial.available() > 0){
-    // read the data
     received = Serial.read();
     if(received == 'r'){
-      //stepper.step(2038);
-      stepper.step(1019);
-      //delay(1000);
-      //Serial.println("rotating");
+      for (int i = 0; i < 1600; i++){
+        digitalWrite(smStepPin, HIGH);
+        delayMicroseconds(700);
+        digitalWrite(smStepPin, LOW);
+        delayMicroseconds(700);
+      }
       received = 's';
     }
-      
   }
-  
-  
-  
-  // stepper.setSpeed(6); // 6 rpm
-  // stepper.step(-2038); // do 2038 steps in the other direction with faster speed -- corresponds to one revolution in 10 seconds
+ 
 }
+
 
 

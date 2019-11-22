@@ -1,0 +1,6 @@
+devel_space: /home/bwilab/pointcloud/pointcloud/devel
+install: false
+install_space: /home/bwilab/pointcloud/pointcloud/install
+profile: default
+source_space: /home/bwilab/pointcloud/pointcloud/src
+workspace: /home/bwilab/pointcloud/pointcloud

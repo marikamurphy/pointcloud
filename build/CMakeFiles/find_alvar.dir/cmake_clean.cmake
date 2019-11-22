@@ -1,6 +1,5 @@
 file(REMOVE_RECURSE
   "CMakeFiles/find_alvar.dir/src/alvar/alvar.cpp.o"
-  "CMakeFiles/find_alvar.dir/src/alvar/AlvarMarker.cpp.o"
   "find_alvar.pdb"
   "find_alvar"
 )

@@ -97,7 +97,7 @@ int main( int argc, char* argv[] )
             boost::mutex::scoped_lock lock( mutex );
             cloud = ptr;
             cloud = filterCloud(cloud, "x", -0.5, 0.5);
-            cloud = filterCloud(cloud, "y", -0.75, 0.75);
+            cloud = filterCloud(cloud, "y", -0.5, 0.5);
             cloud = filterCloud(cloud, "z", -0.5, 1.5);
            
         };
@@ -127,7 +127,7 @@ int main( int argc, char* argv[] )
 
     // Register Callback Function
     viewer->registerKeyboardCallback( keyboard_function );
-    viewer->addCoordinateSystem (1.0, 0.0,0.0, 1.0, "Point Cloud Viewer", 0);
+    viewer->addCoordinateSystem (1.0, 0.0,0.0, 0.0, "Point Cloud Viewer", 0);
     std::cout << "Setting up connection to arduino" << endl;
     //open up connection to arduino
     int fd = open_port();
@@ -192,7 +192,7 @@ int rotate(int fd){
             raise(SIGINT);
         }
         //give turntable time to actually rotate before taking picture
-        boost::this_thread::sleep( boost::posix_time::milliseconds(3000) );
+        boost::this_thread::sleep( boost::posix_time::milliseconds(4000) );
         return 0;
         
 }

@@ -1,0 +1,12 @@
+Symlinking /home/bwilab/pointcloud/pointcloud/devel/./_setup_util.py
+Symlinking /home/bwilab/pointcloud/pointcloud/devel/./local_setup.sh
+Symlinking /home/bwilab/pointcloud/pointcloud/devel/./local_setup.zsh
+Symlinking /home/bwilab/pointcloud/pointcloud/devel/./env.sh
+Symlinking /home/bwilab/pointcloud/pointcloud/devel/./setup.bash
+Symlinking /home/bwilab/pointcloud/pointcloud/devel/./cmake.lock
+Symlinking /home/bwilab/pointcloud/pointcloud/devel/./local_setup.bash
+Symlinking /home/bwilab/pointcloud/pointcloud/devel/./setup.sh
+Symlinking /home/bwilab/pointcloud/pointcloud/devel/./setup.zsh
+Symlinking /home/bwilab/pointcloud/pointcloud/devel/lib/pkgconfig/catkin_tools_prebuild.pc
+Symlinking /home/bwilab/pointcloud/pointcloud/devel/share/catkin_tools_prebuild/cmake/catkin_tools_prebuildConfig-version.cmake
+Symlinking /home/bwilab/pointcloud/pointcloud/devel/share/catkin_tools_prebuild/cmake/catkin_tools_prebuildConfig.cmake
