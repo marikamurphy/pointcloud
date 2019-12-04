@@ -127,8 +127,12 @@ int main( int argc, char* argv[] )
 
     // Register Callback Function
     viewer->registerKeyboardCallback( keyboard_function );
-    viewer->addCoordinateSystem (1.0, 0.0,0.0, 0.0, "Point Cloud Viewer", 0);
-    std::cout << "Setting up connection to arduino" << endl;
+    
+    float x = 0.925117;
+    float y = -0.0842139;
+    float z = -0.16;
+    viewer->addCoordinateSystem (1.0, -y , -z , x, "Point Cloud Viewer", 0); // 0.794131, 0.179306. -.01
+    /* std::cout << "Setting up connection to arduino" << endl; *********************************************************
     //open up connection to arduino
     int fd = open_port();
     set_port(fd);
@@ -139,8 +143,8 @@ int main( int argc, char* argv[] )
         std::cout <<" Connection to arduino failed" <<endl;
         close(fd);
         raise(SIGINT); //exit process
-    }
-
+    } *********************************************************
+    */
     std::cout << "Starting grabber" << endl;
     // Start Grabber
     grabber->start();
@@ -163,14 +167,14 @@ int main( int argc, char* argv[] )
                     //save point cloud
                     savePointCloudToFile(cloud, cloudNumber);
                     //rotate the turntable, check it was sucessful
-                    rotate(fd);
+                    //rotate(fd);*********************************************************
                     //increment number of point clouds captured
                     cloudNumber++; 
                 }
                 //we've finished!
                 else if(cloudNumber >= NUM_ROTATIONS){
                     std::cout << "Finished capture" << endl;
-                    close(fd);
+                    //close(fd); *********************************************************
                     raise(SIGINT); //exit process
                 }
                 //else we haven't started capturing

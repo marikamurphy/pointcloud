@@ -166,6 +166,19 @@ depend:
 .PHONY : depend
 
 #=============================================================================
+# Target rules for targets named calc_center
+
+# Build rule for target.
+calc_center: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 calc_center
+.PHONY : calc_center
+
+# fast build rule for target.
+calc_center/fast:
+	$(MAKE) -f CMakeFiles/calc_center.dir/build.make CMakeFiles/calc_center.dir/build
+.PHONY : calc_center/fast
+
+#=============================================================================
 # Target rules for targets named pcd_merge
 
 # Build rule for target.
@@ -933,6 +946,33 @@ src/alvar/alvar.cpp.s:
 	$(MAKE) -f CMakeFiles/find_alvar.dir/build.make CMakeFiles/find_alvar.dir/src/alvar/alvar.cpp.s
 .PHONY : src/alvar/alvar.cpp.s
 
+src/calc_center/calc_center.o: src/calc_center/calc_center.cpp.o
+
+.PHONY : src/calc_center/calc_center.o
+
+# target to build an object file
+src/calc_center/calc_center.cpp.o:
+	$(MAKE) -f CMakeFiles/calc_center.dir/build.make CMakeFiles/calc_center.dir/src/calc_center/calc_center.cpp.o
+.PHONY : src/calc_center/calc_center.cpp.o
+
+src/calc_center/calc_center.i: src/calc_center/calc_center.cpp.i
+
+.PHONY : src/calc_center/calc_center.i
+
+# target to preprocess a source file
+src/calc_center/calc_center.cpp.i:
+	$(MAKE) -f CMakeFiles/calc_center.dir/build.make CMakeFiles/calc_center.dir/src/calc_center/calc_center.cpp.i
+.PHONY : src/calc_center/calc_center.cpp.i
+
+src/calc_center/calc_center.s: src/calc_center/calc_center.cpp.s
+
+.PHONY : src/calc_center/calc_center.s
+
+# target to generate assembly for a file
+src/calc_center/calc_center.cpp.s:
+	$(MAKE) -f CMakeFiles/calc_center.dir/build.make CMakeFiles/calc_center.dir/src/calc_center/calc_center.cpp.s
+.PHONY : src/calc_center/calc_center.cpp.s
+
 src/merge/pcd_merge.o: src/merge/pcd_merge.cpp.o
 
 .PHONY : src/merge/pcd_merge.o
@@ -996,6 +1036,7 @@ help:
 	@echo "... edit_cache"
 	@echo "... install/local"
 	@echo "... install/strip"
+	@echo "... calc_center"
 	@echo "... pcd_merge"
 	@echo "... pcd_write"
 	@echo "... tf2_msgs_generate_messages_nodejs"
@@ -1060,6 +1101,9 @@ help:
 	@echo "... src/alvar/alvar.o"
 	@echo "... src/alvar/alvar.i"
 	@echo "... src/alvar/alvar.s"
+	@echo "... src/calc_center/calc_center.o"
+	@echo "... src/calc_center/calc_center.i"
+	@echo "... src/calc_center/calc_center.s"
 	@echo "... src/merge/pcd_merge.o"
 	@echo "... src/merge/pcd_merge.i"
 	@echo "... src/merge/pcd_merge.s"

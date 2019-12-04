@@ -1,0 +1,1 @@
+/usr/bin/c++  -fPIC   -g   -shared -Wl,-soname,libgtest_main.so -o libgtest_main.so CMakeFiles/gtest_main.dir/src/gtest_main.cc.o  -L/home/bwilab/pointcloud/pointcloud/gtest/gtest/src -lpthread libgtest.so -lpthread -Wl,-rpath,/home/bwilab/pointcloud/pointcloud/gtest/gtest/src:/home/bwilab/pointcloud/pointcloud/gtest/gtest 

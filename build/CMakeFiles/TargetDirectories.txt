@@ -1,6 +1,7 @@
 /home/bwilab/pointcloud/pointcloud/build/CMakeFiles/edit_cache.dir
 /home/bwilab/pointcloud/pointcloud/build/CMakeFiles/install/local.dir
 /home/bwilab/pointcloud/pointcloud/build/CMakeFiles/install/strip.dir
+/home/bwilab/pointcloud/pointcloud/build/CMakeFiles/calc_center.dir
 /home/bwilab/pointcloud/pointcloud/build/CMakeFiles/pcd_merge.dir
 /home/bwilab/pointcloud/pointcloud/build/CMakeFiles/pcd_write.dir
 /home/bwilab/pointcloud/pointcloud/build/CMakeFiles/tf2_msgs_generate_messages_nodejs.dir
