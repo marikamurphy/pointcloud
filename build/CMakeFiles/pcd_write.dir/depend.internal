@@ -403,8 +403,10 @@ CMakeFiles/pcd_write.dir/src/write/pcd_write.cpp.o
  /usr/local/include/pcl-1.9/pcl/correspondence.h
  /usr/local/include/pcl-1.9/pcl/exceptions.h
  /usr/local/include/pcl-1.9/pcl/filters/boost.h
+ /usr/local/include/pcl-1.9/pcl/filters/conditional_removal.h
  /usr/local/include/pcl-1.9/pcl/filters/filter.h
  /usr/local/include/pcl-1.9/pcl/filters/filter_indices.h
+ /usr/local/include/pcl-1.9/pcl/filters/impl/conditional_removal.hpp
  /usr/local/include/pcl-1.9/pcl/filters/impl/filter.hpp
  /usr/local/include/pcl-1.9/pcl/filters/impl/filter_indices.hpp
  /usr/local/include/pcl-1.9/pcl/filters/impl/passthrough.hpp

@@ -17,7 +17,13 @@ iostream
 -
 fstream
 -
+string
+-
+csignal
+-
 Eigen/Dense
+-
+Eigen/Geometry
 -
 
 /opt/ros/kinetic/include/ar_track_alvar_msgs/AlvarMarker.h

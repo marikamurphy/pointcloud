@@ -17,6 +17,8 @@ string
 -
 Eigen/Dense
 -
+Eigen/Geometry
+-
 
 /usr/include/eigen3/Eigen/Cholesky
 Core

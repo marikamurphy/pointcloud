@@ -24,6 +24,7 @@ This code is created purely for educational reasons
 #include <string>
 #include <stdio.h>
 #include <pcl/filters/passthrough.h>
+#include <pcl/filters/conditional_removal.h>
 
 #include <boost/thread/thread.hpp> //sleep 
 #include <csignal>
@@ -127,12 +128,15 @@ int main( int argc, char* argv[] )
 
     // Register Callback Function
     viewer->registerKeyboardCallback( keyboard_function );
-    
-    float x = 0.925117;
-    float y = -0.0842139;
-    float z = -0.16;
-    viewer->addCoordinateSystem (1.0, -y , -z , x, "Point Cloud Viewer", 0); // 0.794131, 0.179306. -.01
-    /* std::cout << "Setting up connection to arduino" << endl; *********************************************************
+    /*0.35319
+-0.00533151
+ -0.0516639
+ */
+    float x = 0.35319;
+    float y = -0.00533151;
+    float z = -0.0516639;
+    viewer->addCoordinateSystem (1.0, 0 , 0, x*2, "Point Cloud Viewer", 0); // 0.794131, 0.179306. -.01
+    std::cout << "Setting up connection to arduino" << endl; //*********************************************************
     //open up connection to arduino
     int fd = open_port();
     set_port(fd);
@@ -143,8 +147,8 @@ int main( int argc, char* argv[] )
         std::cout <<" Connection to arduino failed" <<endl;
         close(fd);
         raise(SIGINT); //exit process
-    } *********************************************************
-    */
+    }// *********************************************************
+    
     std::cout << "Starting grabber" << endl;
     // Start Grabber
     grabber->start();
@@ -167,14 +171,14 @@ int main( int argc, char* argv[] )
                     //save point cloud
                     savePointCloudToFile(cloud, cloudNumber);
                     //rotate the turntable, check it was sucessful
-                    //rotate(fd);*********************************************************
+                    rotate(fd);//*********************************************************
                     //increment number of point clouds captured
                     cloudNumber++; 
                 }
                 //we've finished!
                 else if(cloudNumber >= NUM_ROTATIONS){
                     std::cout << "Finished capture" << endl;
-                    //close(fd); *********************************************************
+                    close(fd); //*********************************************************
                     raise(SIGINT); //exit process
                 }
                 //else we haven't started capturing
@@ -224,6 +228,31 @@ pcl::PointCloud<PointType>::Ptr filterCloud(pcl::PointCloud<PointType>::ConstPtr
     pass.setFilterLimits (minLimit, maxLimit);
     //pass.setFilterLimitsNegative (true);
     pass.filter (*cloud_filtered);
+
+    //we filter the cloud based off color: get rid of green
+      // build the condition
+    //int rMax = 255;
+    int rMin = 200;
+    int gMax = 200;
+    //int gMin = 0;
+    //int bMax = 255;
+    int bMin = 200;
+    pcl::ConditionOr<PointType>::Ptr color_cond (new pcl::ConditionOr<PointType> ());
+    //color_cond->addComparison (pcl::PackedRGBComparison<PointType>::Ptr (new pcl::PackedRGBComparison<PointType> ("r", pcl::ComparisonOps::LT, rMax)));
+    color_cond->addComparison (pcl::PackedRGBComparison<PointType>::Ptr (new pcl::PackedRGBComparison<PointType> ("r", pcl::ComparisonOps::GT, rMin)));
+    color_cond->addComparison (pcl::PackedRGBComparison<PointType>::Ptr (new pcl::PackedRGBComparison<PointType> ("g", pcl::ComparisonOps::LT, gMax)));
+    //color_cond->addComparison (pcl::PackedRGBComparison<PointType>::Ptr (new pcl::PackedRGBComparison<PointType> ("g", pcl::ComparisonOps::GT, gMin)));
+    //color_cond->addComparison (pcl::PackedRGBComparison<PointType>::Ptr (new pcl::PackedRGBComparison<PointType> ("b", pcl::ComparisonOps::LT, bMax)));
+    color_cond->addComparison (pcl::PackedRGBComparison<PointType>::Ptr (new pcl::PackedRGBComparison<PointType> ("b", pcl::ComparisonOps::GT, bMin)));
+
+    // build the filter
+    pcl::ConditionalRemoval<PointType> condrem;
+  condrem.setCondition (color_cond);
+  condrem.setInputCloud (cloud);
+  condrem.setKeepOrganized(true); 
+
+    // apply filter
+    //condrem.filter (*cloud_filtered);
     return cloud_filtered;
 
 }

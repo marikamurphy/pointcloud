@@ -31,9 +31,9 @@ void printMathematica(MatrixXf A) {
         for(size_t col = 0; col < (A.cols() - 1); col++) {
             cout << A(row, col) << ",";
         }
-        cout << "}";
+        cout << A(row, A.cols() - 1) << "},";
     }
-    cout << "}";
+    cout << "}" <<endl;
 }
 
 
@@ -63,31 +63,82 @@ int main(int argc, char **argv) {
         }
         token = strtok(NULL, ",");
     }
-
+    //put coordinates in the homogeneous coordinate system
     MatrixXf pointsH = cartToHom(points.transpose());
     cout <<"pointsH"<<endl<< pointsH <<endl;
+    //we do singular value decomposition to find the v matrix
     JacobiSVD<MatrixXf> svd(pointsH.transpose(), ComputeThinV);
     MatrixXf vMat = svd.matrixV();
     cout << "Its right singular vectors are the columns of the thin V matrix:" << endl << vMat << endl;
-    Quaternion<float> quad(vMat(3,3), vMat(0,3), vMat(1,3), vMat(2,3));
+    //the very last column describes the rotation to fit coordinates to plane
+    Vector3f newCoord(vMat(0,3), vMat(1,3), vMat(2,3));
+    Vector3f oldCoord(0.0,0.0,1.0);
+    Quaternion<float> quad = Quaternion<float>::FromTwoVectors(newCoord,oldCoord);
     quad.normalize();
-    MatrixXf rotMat = quad.toRotationMatrix();
+    //we transform the quaterion into a rotation matrix so we can easily multiply it by the points
+    Matrix3f rotMat = quad.toRotationMatrix();
     cout << "rotMat" <<endl << rotMat<<endl;
     cout <<"points"<<endl<<points<<endl;
+    //we transpose all the points onto the plane
     MatrixXf rotatedPoints =  rotMat * points.transpose();
     cout <<"rotated points" <<endl<<rotatedPoints <<endl;
+    //printMathematica(rotatedPoints);
+    float zCenter = rotatedPoints(2,0);
     for(int col = 0; col < rotatedPoints.cols(); col++){
         rotatedPoints(2, col)= 1.0;
     }
     cout << "2D:"<<endl<< rotatedPoints <<endl;
+    /*Solution by method of least squares:
+    A*c = b, c' = argmin(||A*c - b||^2)
+    A = [x y 1], b = [x^2+y^2] */
     MatrixXf A = rotatedPoints.transpose();
     cout << "A:"<<endl<< A <<endl;
-    JacobiSVD<MatrixXf> svd2(A, ComputeFullU | ComputeFullV);
-    VectorXf b(rotatedPoints.cols());
-    for(int r =0; r <rotatedPoints.cols(); r++){
-        b(r) = pow(rotatedPoints(0,r),2) +pow(rotatedPoints(1,r),2);
-   }
-   
-    cout << "b" <<endl << b<<endl;
-    cout <<"?" <<endl<< svd2.solve(b) <<endl;
+    JacobiSVD<MatrixXf> svdCenter(A, ComputeFullV|ComputeFullU);
+    //now calculate the 
+    VectorXf b(A.rows());
+    for (int i = 0; i < A.rows(); i++){
+        // b = X^2+y^2
+        b(i)= A(i,0)*A(i,0)+A(i,1)*A(i,1);
+    }
+    Vector3f center = svdCenter.solve(b);
+    cout <<"soln"<<endl<< center  <<endl;
+    float xCenter = center(0)/2;
+    float yCenter = center(1)/2;
+    cout << "X: " << xCenter << endl <<"Y: "<<yCenter<<endl <<"Z"<<zCenter<<endl;
+    Vector3f centerMat(xCenter,yCenter,zCenter);
+    cout <<"centerMat on plane: "<<centerMat<<endl<<"in our coords: " <<rotMat.transpose() * centerMat<<endl;
+    
+    // now we save the center and the rotation matrix
+
+    /*//find matrix that describes equations of ellipses
+    //𝑎𝑥2+𝑏𝑥𝑦+𝑐𝑦2+𝑑𝑥+𝑒𝑦+𝑓=0
+    MatrixXf ellipse(A.rows(), 6);
+    for(int r = 0; r < ellipse.rows();r++){
+        double x = A(r,0);
+        double y = A(r,1);
+        ellipse(r,0)=x*x;
+        ellipse(r,1)=x*y;
+        ellipse(r,2)=y*y;
+        ellipse(r,3)=x;
+        ellipse(r,4)=y;
+        ellipse(r,5)=1;
+    }
+    cout <<"ellipses equations matrix" <<endl<< ellipse <<endl;
+    JacobiSVD<MatrixXf> svdEllipse(ellipse, ComputeFullV | ComputeFullU);
+    MatrixXf vMatEllipse = svdEllipse.matrixV();
+    VectorXf ellipse_soln(vMatEllipse.rows());
+    double a = vMatEllipse(0,5);
+    double b = vMatEllipse(1,5);
+    double c = vMatEllipse(2,5);
+    double d = vMatEllipse(3,5);
+    double e = vMatEllipse(4,5);
+    double f = vMatEllipse(5,5);
+    cout <<"ellipse soln"<<endl<<ellipse_soln<<endl;
+    Matrix3f quad_equation;
+    quad_equation << a, b/2, d/2,
+                    b/2, c, e/2,
+                    d/2, e/2, f;
+    printMathematica(quad_equation);*/
+    
+
 }

@@ -19,6 +19,8 @@ stdio.h
 -
 pcl/filters/passthrough.h
 -
+pcl/filters/conditional_removal.h
+-
 boost/thread/thread.hpp
 -
 csignal
@@ -2502,6 +2504,14 @@ boost/function.hpp
 boost/optional.hpp
 -
 
+/usr/local/include/pcl-1.9/pcl/filters/conditional_removal.h
+pcl/common/eigen.h
+-
+pcl/filters/filter.h
+-
+pcl/filters/impl/conditional_removal.hpp
+-
+
 /usr/local/include/pcl-1.9/pcl/filters/filter.h
 pcl/pcl_base.h
 -
@@ -2522,6 +2532,14 @@ pcl/filters/impl/filter.hpp
 pcl/filters/filter.h
 -
 pcl/filters/impl/filter_indices.hpp
+-
+
+/usr/local/include/pcl-1.9/pcl/filters/impl/conditional_removal.hpp
+pcl/common/io.h
+-
+pcl/common/copy_point.h
+-
+pcl/filters/conditional_removal.h
 -
 
 /usr/local/include/pcl-1.9/pcl/filters/impl/filter.hpp
