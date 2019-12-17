@@ -26,6 +26,7 @@ This code is created purely for educational reasons
 #include <pcl/filters/passthrough.h>
 #include <pcl/filters/conditional_removal.h>
 
+
 #include <boost/thread/thread.hpp> //sleep 
 #include <csignal>
 #include <unistd.h> //UNIX Standard function definitions
@@ -86,7 +87,7 @@ int main( int argc, char* argv[] )
     // PCL Visualizer
     boost::shared_ptr<pcl::visualization::PCLVisualizer> viewer(
         new pcl::visualization::PCLVisualizer( "Point Cloud Viewer" ) );
-    viewer->setCameraPosition( 0.0, 0.0, -2.5, 0.0, 0.0, 0.0 );
+    //viewer->setCameraPosition( 0.0, 0.0, 0.0, 0.0, 0.0, 0.0 );
 
     // Point Cloud
     pcl::PointCloud<PointType>::ConstPtr cloud;
@@ -106,6 +107,7 @@ int main( int argc, char* argv[] )
     // Kinect2Grabber (may use later?)
     //boost::shared_ptr<pcl::Grabber> grabber = boost::make_shared<pcl::Kinect2Grabber>();
     // create a new grabber for OpenNI devices
+    //boost::shared_ptr<pcl::Grabber> grabber(new pcl::OpenNIGrabber());
     boost::shared_ptr<pcl::Grabber> grabber(new pcl::OpenNIGrabber());
 
     // Register Callback Function
@@ -128,14 +130,15 @@ int main( int argc, char* argv[] )
 
     // Register Callback Function
     viewer->registerKeyboardCallback( keyboard_function );
-    /*0.35319
--0.00533151
- -0.0516639
+    /*x=0.0569  y=0.1878  z=0.8144
+
+
  */
-    float x = 0.35319;
-    float y = -0.00533151;
-    float z = -0.0516639;
-    viewer->addCoordinateSystem (1.0, 0 , 0, x*2, "Point Cloud Viewer", 0); // 0.794131, 0.179306. -.01
+    float x = 0.0564;
+    float y = 0.1882;
+    float z = 0.83;
+   
+    viewer->addCoordinateSystem (1.0, x , y, z, "Point Cloud Viewer", 0); // 
     std::cout << "Setting up connection to arduino" << endl; //*********************************************************
     //open up connection to arduino
     int fd = open_port();
